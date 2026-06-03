@@ -501,7 +501,7 @@ h6 {
 .glow-ring {
     position: absolute;
     inset: 0;
-    border-radius: 80%;
+    border-radius: 50%;
     background: conic-gradient(from 0deg, transparent, var(--silver), transparent 65%);
     animation: rotateGlow 4s linear infinite;
     z-index: 1;
@@ -510,7 +510,7 @@ h6 {
 .glow-ring::after {
     content: '';
     position: absolute;
-    inset: 3px;
+    inset: 9px;
     background: var(--bg-dark);
     border-radius: 50%;
     z-index: 2;

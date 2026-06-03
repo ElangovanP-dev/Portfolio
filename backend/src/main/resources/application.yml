@@ -1,0 +1,38 @@
+# Portfolio API Configuration
+spring:
+  application:
+    name: portfolio-api
+
+  profiles:
+    active: dev
+
+  # JPA defaults (overridden per profile)
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+# Server
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+# JWT Configuration
+app:
+  jwt:
+    secret: Y29tLmVsYW5nb3Zhbi5wb3J0Zm9saW8uc2VjcmV0LWtleS1mb3Itand0LWF1dGhlbnRpY2F0aW9uLTIwMjY=
+    expiration-ms: 900000        # 15 minutes
+    refresh-expiration-ms: 604800000  # 7 days
+  admin:
+    email: admin@elangovan.dev
+    password: Admin@2026
+
+# Springdoc OpenAPI
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method

@@ -1,0 +1,22 @@
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.metals/
+.bloop/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Java/Maven
+backend/target/
+backend/.bloop/
+backend/.metals/
+backend/.settings/
+backend/.project
+backend/.classpath
