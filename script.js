@@ -208,14 +208,7 @@ window.addEventListener('load', () => {
             }
         );
 
-        // Stagger Gallery
-        gsap.fromTo(".gs-gallery", 
-            { autoAlpha: 0, scale: 0.9 },
-            { 
-                autoAlpha: 1, scale: 1, duration: 0.8, stagger: 0.15, ease: "power2.out",
-                scrollTrigger: { trigger: ".gallery-grid", start: "top 80%" }
-            }
-        );
+
     }
 
     // 6. Sticky Navbar & Back to Top logic
@@ -247,9 +240,11 @@ window.addEventListener('load', () => {
         });
     }
 
-    // 7. Mobile Menu & Navigation
+    // 7. Mobile Menu, Dynamic Indicator & ScrollSpy
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
+    const navItems = document.querySelectorAll('.nav-item');
+    const indicator = document.querySelector('.nav-indicator');
 
     if(hamburger) {
         hamburger.addEventListener('click', () => {
@@ -270,23 +265,86 @@ window.addEventListener('load', () => {
         });
     }
 
-    // Smooth Scroll Navbar Area
-    document.querySelectorAll('.nav-item').forEach(item => {
-        item.addEventListener('click', (e) => {
-            const targetId = item.getAttribute('href');
-            if (targetId && targetId.startsWith('#')) {
-                e.preventDefault();
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    if(window.innerWidth <= 768 && navLinks && navLinks.style.display === 'flex') {
-                        navLinks.style.display = 'none';
+    // Nav Indicator Positioning function
+    function positionIndicator(item) {
+        if (!indicator || window.innerWidth <= 768) {
+            if (indicator) indicator.style.opacity = '0';
+            return;
+        }
+        indicator.style.left = `${item.offsetLeft}px`;
+        indicator.style.width = `${item.offsetWidth}px`;
+        indicator.style.top = `${item.offsetTop}px`;
+        indicator.style.height = `${item.offsetHeight}px`;
+        indicator.style.opacity = '1';
+    }
+
+    if (navItems.length > 0 && indicator) {
+        navItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                positionIndicator(item);
+            });
+
+            item.addEventListener('click', (e) => {
+                const targetId = item.getAttribute('href');
+                if (targetId && targetId.startsWith('#')) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        if(window.innerWidth <= 768 && navLinks && navLinks.style.display === 'flex') {
+                            navLinks.style.display = 'none';
+                        }
                     }
                 }
-            }
+                navItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                positionIndicator(item);
+            });
         });
-    });
+
+        // Reposition pill to active item when mouse leaves the navbar container
+        if (navLinks) {
+            navLinks.addEventListener('mouseleave', () => {
+                const activeItem = document.querySelector('.nav-item.active');
+                if (activeItem) {
+                    positionIndicator(activeItem);
+                } else {
+                    indicator.style.opacity = '0';
+                }
+            });
+        }
+
+        // ScrollSpy logic to set active nav link based on scroll position
+        const sections = document.querySelectorAll('section');
+        window.addEventListener('scroll', () => {
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 120;
+                if (window.scrollY >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${currentSection}`) {
+                    item.classList.add('active');
+                    positionIndicator(item);
+                }
+            });
+        });
+
+        // Initialize placement on load
+        setTimeout(() => {
+            const activeItem = document.querySelector('.nav-item.active');
+            if (activeItem) {
+                positionIndicator(activeItem);
+            }
+        }, 400);
+    }
+
+
 });

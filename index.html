@@ -32,6 +32,7 @@
         <div class="nav-container">
             <a href="#home" class="logo">E<span>P</span></a>
             <nav class="nav-links">
+                <div class="nav-indicator"></div>
                 <a href="#about" class="nav-item">About</a>
                 <a href="#skills" class="nav-item">Skills</a>
                 <a href="#experience" class="nav-item">Experience</a>
@@ -50,26 +51,35 @@
             <!-- Particles Container -->
             <div id="particles-js"></div>
 
-            <div class="hero-content gs-reveal">
-                <p class="tagline">Hello, I am</p>
-                <h1 class="hero-title">Elangovan P</h1>
-                <h2 class="hero-subtitle">Passionate Computer Science Student | Java Developer | Web Enthusiast</h2>
-                <p class="hero-desc"
-                    style="color: var(--text-secondary); font-size: 1.1rem; max-width: 650px; margin: 1.5rem auto; line-height: 1.6;">
-                    I build modern, scalable, and user-focused digital experiences using Java, Web Technologies, and
-                    real-world project ideas.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View Projects <i class="fas fa-arrow-right"></i></a>
-                    <a href="#" class="btn btn-secondary">Download Resume <i class="fas fa-download"></i></a>
+            <div class="container hero-grid">
+                <div class="hero-content gs-reveal">
+                    <p class="tagline">Hello, I am</p>
+                    <h1 class="hero-title">Elangovan P</h1>
+                    <h2 class="hero-subtitle">Passionate Computer Science Student | Java Developer | Web Enthusiast</h2>
+                    <p class="hero-desc">
+                        I build modern, scalable, and user-focused digital experiences using Java, Web Technologies, and
+                        real-world project ideas.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">View Projects <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="btn btn-secondary">Download Resume <i class="fas fa-download"></i></a>
+                    </div>
+                    <!-- Social links -->
+                    <div class="social-links">
+                        <a href="https://github.com/ElangoHackIOT5" target="_blank" class="social-icon"><i
+                                class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/elangovan-p-2a4567251" target="_blank" class="social-icon"><i
+                                class="fab fa-linkedin-in"></i></a>
+                        <a href="mailto:elangovanp222@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+                    </div>
                 </div>
-                <!-- Social links -->
-                <div class="social-links">
-                    <a href="https://github.com/ElangoHackIOT5" target="_blank" class="social-icon"><i
-                            class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/elangovan-p-2a4567251" target="_blank" class="social-icon"><i
-                            class="fab fa-linkedin-in"></i></a>
-                    <a href="mailto:elangovanp222@gmail.com" class="social-icon"><i class="fas fa-envelope"></i></a>
+                
+                <div class="hero-image-container gs-reveal">
+                    <div class="profile-image-container">
+                        <img src="ProfileImage.jpg" width="300" alt="Elangovan P Profile" class="profile-img"
+                            loading="lazy">
+                        <div class="glow-ring"></div>
+                    </div>
                 </div>
             </div>
             <div class="scroll-indicator gs-reveal">
@@ -83,21 +93,44 @@
         <section id="about" class="about section">
             <div class="container">
                 <h2 class="section-title gs-reveal">About Me</h2>
-                <div class="about-grid gs-reveal">
-
-                    <div class="profile-image-container">
-                        <img src="ProfileImage.jpg" alt="Elangovan P Profile" class="profile-img" loading="lazy">
-                        <div class="glow-ring"></div>
+                <div class="about-wrapper gs-reveal">
+                    <!-- Main Bio Card -->
+                    <div class="about-bio-card glass-panel">
+                        <div class="bio-accent-line"></div>
+                        <p class="bio-intro">Bridging structured code structures with visually refined design.</p>
+                        <p class="bio-body">
+                            I am a Final-year Computer Science Engineering student passionate about building
+                            real-world applications. I enjoy working with Java, frontend technologies, and exploring
+                            backend development using Spring Boot.
+                        </p>
+                        <p class="bio-body">
+                            I continuously improve my skills through internships, coding challenges, and hands-on
+                            projects, aiming to construct scalable, user-centric software.
+                        </p>
                     </div>
 
-                    <div class="about-content-wrapper">
-                        <div class="about-text" style="font-size: 1.1rem; line-height: 1.7;">
-                            <p>I am a second-year Computer Science Engineering student passionate about building
-                                real-world applications. I enjoy working with Java, frontend technologies, and exploring
-                                backend development using Spring Boot.</p>
-                            <br>
-                            <p>I continuously improve my skills through internships, coding challenges, and hands-on
-                                projects.</p>
+                    <!-- Highlight Cards Grid -->
+                    <div class="about-pillars">
+                        <div class="pillar-card glass-panel">
+                            <div class="pillar-icon-wrapper">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3>Java Developer</h3>
+                            <p>Focused on object-oriented programming, design patterns, and database connectivity.</p>
+                        </div>
+                        <div class="pillar-card glass-panel">
+                            <div class="pillar-icon-wrapper">
+                                <i class="fas fa-cubes"></i>
+                            </div>
+                            <h3>Web Enthusiast</h3>
+                            <p>Designing modern, responsive, and visually interactive layouts using standard web technologies.</p>
+                        </div>
+                        <div class="pillar-card glass-panel">
+                            <div class="pillar-icon-wrapper">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3>CS Engineer</h3>
+                            <p>Applying engineering methodologies and algorithmic problem-solving to real-world software ideas.</p>
                         </div>
                     </div>
                 </div>
@@ -107,57 +140,66 @@
         <!-- Skills Section -->
         <section id="skills" class="skills section">
             <div class="container">
-                <h2 class="section-title gs-reveal">Technical Arsenal</h2>
-                <div class="about-grid gs-reveal">
-
-                    <div class="profile-image-container">
-                        <img src="C:/Users/elang/.gemini/antigravity/brain/5e5f3a9d-d8e7-46a1-8608-ecd2a44bdf17/skills_1775289895768.png"
-                            alt="Technical Arsenal" class="profile-img" loading="lazy">
-                        <div class="glow-ring"></div>
-                    </div>
-
-                    <div class="skills-grid">
-                        <div class="skill-card glass-panel gs-skill">
-                            <i class="fab fa-java skill-icon" style="color: #e5b324;"></i>
-                            <h4>Java</h4>
+                <h2 class="section-title gs-reveal">Skills</h2>
+                <div class="skills-grid gs-reveal">
+                    <div class="skill-card glass-panel gs-skill">
+                        <i class="fab fa-java skill-icon" style="color: #e5b324;"></i>
+                        <h4>Java</h4>
+                        <div class="progress-bar-wrapper">
                             <div class="progress-bar">
                                 <div class="progress" data-width="90%"></div>
                             </div>
+                            <span class="progress-label">90%</span>
                         </div>
-                        <div class="skill-card glass-panel gs-skill">
-                            <i class="fab fa-html5 skill-icon"></i>
-                            <h4>HTML & CSS</h4>
+                    </div>
+                    <div class="skill-card glass-panel gs-skill">
+                        <i class="fab fa-html5 skill-icon"></i>
+                        <h4>HTML & CSS</h4>
+                        <div class="progress-bar-wrapper">
                             <div class="progress-bar">
                                 <div class="progress" data-width="85%"></div>
                             </div>
+                            <span class="progress-label">85%</span>
                         </div>
-                        <div class="skill-card glass-panel gs-skill">
-                            <i class="fab fa-js skill-icon"></i>
-                            <h4>JavaScript</h4>
+                    </div>
+                    <div class="skill-card glass-panel gs-skill">
+                        <i class="fab fa-js skill-icon"></i>
+                        <h4>JavaScript</h4>
+                        <div class="progress-bar-wrapper">
                             <div class="progress-bar">
                                 <div class="progress" data-width="80%"></div>
                             </div>
+                            <span class="progress-label">80%</span>
                         </div>
-                        <div class="skill-card glass-panel gs-skill">
-                            <i class="fas fa-database skill-icon"></i>
-                            <h4>SQL</h4>
+                    </div>
+                    <div class="skill-card glass-panel gs-skill">
+                        <i class="fas fa-database skill-icon"></i>
+                        <h4>SQL</h4>
+                        <div class="progress-bar-wrapper">
                             <div class="progress-bar">
                                 <div class="progress" data-width="75%"></div>
                             </div>
+                            <span class="progress-label">75%</span>
                         </div>
-                        <div class="skill-card glass-panel gs-skill">
-                            <i class="fas fa-leaf skill-icon"></i>
-                            <h4>Spring Boot (Learning)</h4>
+                    </div>
+                    <div class="skill-card glass-panel gs-skill">
+                        <i class="fas fa-leaf skill-icon"></i>
+                        <h4>Spring Boot (Learning)</h4>
+                        <div class="progress-bar-wrapper">
                             <div class="progress-bar">
                                 <div class="progress" data-width="50%"></div>
                             </div>
+                            <span class="progress-label">50%</span>
                         </div>
-                        <div class="skill-card glass-panel gs-skill">
-                            <i class="fab fa-git-alt skill-icon"></i>
-                            <h4>Git & Problem Solving</h4>
+                    </div>
+                    <div class="skill-card glass-panel gs-skill">
+                        <i class="fab fa-git-alt skill-icon"></i>
+                        <h4>Git & Problem Solving</h4>
+                        <div class="progress-bar-wrapper">
                             <div class="progress-bar">
                                 <div class="progress" data-width="85%"></div>
                             </div>
+                            <span class="progress-label">85%</span>
                         </div>
                     </div>
                 </div>
@@ -168,12 +210,7 @@
         <section id="experience" class="experience section">
             <div class="container">
                 <h2 class="section-title gs-reveal">Experience</h2>
-                <div class="about-grid gs-reveal">
-                    <div class="profile-image-container">
-                        <img src="C:/Users/elang/.gemini/antigravity/brain/5e5f3a9d-d8e7-46a1-8608-ecd2a44bdf17/experience_1775293316877.png"
-                            alt="Experience" class="profile-img" loading="lazy">
-                        <div class="glow-ring"></div>
-                    </div>
+                <div class="experience-wrapper gs-reveal">
                     <div class="timeline">
                         <div class="timeline-item gs-reveal">
                             <div class="timeline-dot"></div>
@@ -195,112 +232,79 @@
         <section id="projects" class="projects section">
             <div class="container">
                 <h2 class="section-title gs-reveal">Projects</h2>
-                <div class="about-grid gs-reveal">
-
-                    <div class="profile-image-container">
-                        <img src="C:/Users/elang/.gemini/antigravity/brain/5e5f3a9d-d8e7-46a1-8608-ecd2a44bdf17/projects_1775293357106.png"
-                            alt="Projects" class="profile-img" loading="lazy">
-                        <div class="glow-ring"></div>
-                    </div>
-
-                    <div class="projects-grid">
-                        <!-- Project 1 -->
-                        <div class="project-card glass-panel gs-project">
-                            <div class="project-info" style="padding-top: 25px;">
-                                <div class="project-tags">
-                                    <span>Hackathon</span>
-                                    <span>Java</span>
-                                </div>
-                                <h3>AI Resume Analyzer</h3>
-                                <p>A hackathon project focused on intelligently analyzing and parsing resumes.</p>
-                                <div class="project-links">
-                                    <a href="https://github.com/ElangoHackIOT5" target="_blank" class="project-link"><i
-                                            class="fab fa-github"></i> Code</a>
-                                </div>
+                <div class="projects-grid gs-reveal">
+                    <!-- Project 1 -->
+                    <div class="project-card glass-panel gs-project">
+                        <div class="card-spotlight"></div>
+                        <div class="card-shine"></div>
+                        <div class="project-info" style="padding-top: 25px;">
+                            <div class="project-tags">
+                                <span>Hackathon</span>
+                                <span>Java</span>
                             </div>
-                        </div>
-                        <!-- Project 2 -->
-                        <div class="project-card glass-panel gs-project">
-                            <div class="project-info" style="padding-top: 25px;">
-                                <div class="project-tags">
-                                    <span>Java</span>
-                                    <span>SQL</span>
-                                </div>
-                                <h3>Personal Expense Tracker</h3>
-                                <p>A robust Java-based application to track and manage personal daily finances.</p>
-                                <div class="project-links">
-                                    <a href="https://github.com/ElangoHackIOT5" target="_blank" class="project-link"><i
-                                            class="fab fa-github"></i> Code</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Project 3 -->
-                        <div class="project-card glass-panel gs-project">
-                            <div class="project-info" style="padding-top: 25px;">
-                                <div class="project-tags">
-                                    <span>Full Stack</span>
-                                    <span>Web</span>
-                                </div>
-                                <h3>Online Quiz Application</h3>
-                                <p>A complete full-stack web application for hosting and taking dynamic quizzes.</p>
-                                <div class="project-links">
-                                    <a href="https://github.com/ElangoHackIOT5" target="_blank" class="project-link"><i
-                                            class="fab fa-github"></i> Code</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Project 4 -->
-                        <div class="project-card glass-panel gs-project">
-                            <div class="project-info" style="padding-top: 25px;">
-                                <div class="project-tags">
-                                    <span>App Idea</span>
-                                    <span>Planning</span>
-                                </div>
-                                <h3>Fitness Connect</h3>
-                                <p>An innovative app idea designed to connect fitness enthusiasts globally.</p>
-                                <div class="project-links">
-                                    <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i>
-                                        Details</a>
-                                </div>
+                            <h3>AI Resume Analyzer</h3>
+                            <p>A hackathon project focused on intelligently analyzing and parsing resumes.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/ElangoHackIOT5" target="_blank" class="project-link"><i
+                                        class="fab fa-github"></i> Code</a>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Gallery Section -->
-        <section id="gallery" class="gallery section">
-            <div class="container">
-                <h2 class="section-title gs-reveal">Creative Gallery</h2>
-                <div class="about-grid gs-reveal">
-
-                    <div class="profile-image-container">
-                        <img src="C:/Users/elang/.gemini/antigravity/brain/5e5f3a9d-d8e7-46a1-8608-ecd2a44bdf17/gallery_main_1775293399199.png"
-                            alt="Creative Gallery" class="profile-img" loading="lazy">
-                        <div class="glow-ring"></div>
+                    <!-- Project 2 -->
+                    <div class="project-card glass-panel gs-project">
+                        <div class="card-spotlight"></div>
+                        <div class="card-shine"></div>
+                        <div class="project-info" style="padding-top: 25px;">
+                            <div class="project-tags">
+                                <span>Java</span>
+                                <span>SQL</span>
+                            </div>
+                            <h3>Personal Expense Tracker</h3>
+                            <p>A robust Java-based application to track and manage personal daily finances.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/ElangoHackIOT5" target="_blank" class="project-link"><i
+                                        class="fab fa-github"></i> Code</a>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="gallery-grid">
-                        <div class="gallery-item gs-gallery">
-                            <img src="C:/Users/elang/.gemini/antigravity/brain/154e6bb1-1324-43c2-89ea-56651dc745d5/aura_dashboard_1774632524176.png"
-                                alt="Gallery 1" loading="lazy">
-                            <span>Dashboard UI</span>
+                    <!-- Project 3 -->
+                    <div class="project-card glass-panel gs-project">
+                        <div class="card-spotlight"></div>
+                        <div class="card-shine"></div>
+                        <div class="project-info" style="padding-top: 25px;">
+                            <div class="project-tags">
+                                <span>Full Stack</span>
+                                <span>Web</span>
+                            </div>
+                            <h3>Online Quiz Application</h3>
+                            <p>A complete full-stack web application for hosting and taking dynamic quizzes.</p>
+                            <div class="project-links">
+                                <a href="https://github.com/ElangoHackIOT5" target="_blank" class="project-link"><i
+                                        class="fab fa-github"></i> Code</a>
+                            </div>
                         </div>
-                        <div class="gallery-item gs-gallery">
-                            <img src="C:/Users/elang/.gemini/antigravity/brain/154e6bb1-1324-43c2-89ea-56651dc745d5/nexus_api_1774632549576.png"
-                                alt="Gallery 2" loading="lazy">
-                            <span>Network Graph</span>
-                        </div>
-                        <div class="gallery-item gs-gallery">
-                            <img src="C:/Users/elang/.gemini/antigravity/brain/154e6bb1-1324-43c2-89ea-56651dc745d5/velocity_engine_1774632574414.png"
-                                alt="Gallery 3" loading="lazy">
-                            <span>Particles Setup</span>
+                    </div>
+                    <!-- Project 4 -->
+                    <div class="project-card glass-panel gs-project">
+                        <div class="card-spotlight"></div>
+                        <div class="card-shine"></div>
+                        <div class="project-info" style="padding-top: 25px;">
+                            <div class="project-tags">
+                                <span>App Idea</span>
+                                <span>Planning</span>
+                            </div>
+                            <h3>Fitness Connect</h3>
+                            <p>An innovative app idea designed to connect fitness enthusiasts globally.</p>
+                            <div class="project-links">
+                                <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i>
+                                    Details</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
 
         <!-- Contact Section -->
         <section id="contact" class="contact section">
