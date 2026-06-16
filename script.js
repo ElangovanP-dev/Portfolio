@@ -346,5 +346,125 @@ window.addEventListener('load', () => {
         }, 400);
     }
 
+    // Contact Form Submission Handler
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const messageInput = document.getElementById('message');
+            const submitBtn = contactForm.querySelector('.submit-btn');
+            
+            if (!nameInput || !emailInput || !messageInput || !submitBtn) return;
+            
+            // Save original button content and disable
+            const originalBtnContent = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
+            
+            fetch("https://formsubmit.co/ajax/elangovanp222@gmail.com", {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: nameInput.value,
+                    email: emailInput.value,
+                    message: messageInput.value
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Network response was not ok.');
+            })
+            .then(data => {
+                showToast("Message sent successfully! I'll get back to you soon.", "success");
+                contactForm.reset();
+            })
+            .catch(error => {
+                console.error('Submission error:', error);
+                showToast("Failed to send message. Please try again.", "error");
+            })
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnContent;
+            });
+        });
+    }
 
+    // Modern Toast Notification System
+    function showToast(message, type) {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.style.position = 'fixed';
+        toast.style.bottom = '30px';
+        toast.style.right = '30px';
+        toast.style.padding = '15px 25px';
+        toast.style.borderRadius = '8px';
+        toast.style.color = '#fff';
+        toast.style.fontSize = '0.95rem';
+        toast.style.fontWeight = '500';
+        toast.style.zIndex = '10000';
+        toast.style.display = 'flex';
+        toast.style.alignItems = 'center';
+        toast.style.gap = '10px';
+        toast.style.boxShadow = '0 10px 30px rgba(0,0,0,0.3)';
+        toast.style.border = '1px solid rgba(255,255,255,0.1)';
+        toast.style.transform = 'translateY(100px)';
+        toast.style.opacity = '0';
+        
+        const icon = type === 'success' 
+            ? '<i class="fas fa-check-circle" style="color: #ffd043;"></i>' 
+            : '<i class="fas fa-exclamation-circle" style="color: #e71d36;"></i>';
+            
+        toast.innerHTML = `${icon} <span>${message}</span>`;
+        
+        if (type === 'success') {
+            toast.style.background = 'rgba(8, 51, 32, 0.95)'; // Matching deep green
+            toast.style.borderLeft = '4px solid #e5b324'; // Accent gold
+        } else {
+            toast.style.background = 'rgba(40, 10, 10, 0.95)';
+            toast.style.borderLeft = '4px solid #e71d36';
+        }
+        
+        document.body.appendChild(toast);
+        
+        // GSAP animation
+        if (typeof gsap !== 'undefined') {
+            gsap.to(toast, {
+                y: 0,
+                opacity: 1,
+                duration: 0.5,
+                ease: 'power3.out',
+                onComplete: () => {
+                    setTimeout(() => {
+                        gsap.to(toast, {
+                            y: 100,
+                            opacity: 0,
+                            duration: 0.5,
+                            ease: 'power3.in',
+                            onComplete: () => toast.remove()
+                        });
+                    }, 4000);
+                }
+            });
+        } else {
+            // CSS Fallback
+            toast.style.transition = 'all 0.5s ease';
+            setTimeout(() => {
+                toast.style.transform = 'translateY(0)';
+                toast.style.opacity = '1';
+                setTimeout(() => {
+                    toast.style.transform = 'translateY(100px)';
+                    toast.style.opacity = '0';
+                    setTimeout(() => toast.remove(), 500);
+                }, 4000);
+            }, 100);
+        }
+    }
 });

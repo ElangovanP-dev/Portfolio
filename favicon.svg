@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd043" />
+      <stop offset="50%" stop-color="#e5b324" />
+      <stop offset="100%" stop-color="#b8860b" />
+    </linearGradient>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#083320" />
+      <stop offset="100%" stop-color="#041f13" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="15" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <!-- Background Hexagon/Shield or Rounded Rect for a very modern app icon look -->
+  <rect x="24" y="24" width="464" height="464" rx="128" fill="url(#bg-grad)" stroke="url(#gold-grad)" stroke-width="16" />
+  
+  <!-- Stylized Monogram EP -->
+  <g filter="url(#glow)">
+    <text x="50%" y="270" 
+          font-family="'Outfit', 'Inter', 'Segoe UI', sans-serif" 
+          font-size="220" 
+          font-weight="900" 
+          fill="url(#gold-grad)" 
+          text-anchor="middle" 
+          dominant-baseline="middle"
+          letter-spacing="-10">EP</text>
+  </g>
+  
+  <!-- Subtle decorative dot or element -->
+  <circle cx="390" cy="360" r="20" fill="#ffd043" />
+</svg>
