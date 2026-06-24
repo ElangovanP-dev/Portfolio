@@ -20,3 +20,10 @@ backend/.metals/
 backend/.settings/
 backend/.project
 backend/.classpath
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
