@@ -80,16 +80,15 @@ public class DataSeeder implements CommandLineRunner {
         experienceRepository.save(exp);
         log.info("✅ 1 experience entry seeded");
 
-        // ── Seed Projects (from your portfolio HTML) ──
-        seedProject(user, "AI Resume Analyzer",
-                "A hackathon project focused on intelligently analyzing and parsing resumes.",
-                "Hackathon, Java",
-                "https://github.com/ElangoHackIOT5", null, 1);
+        seedProject(user, "ResuMind",
+                "An intelligent AI-powered resume analyzer and parser designed to evaluate resume metrics and suggest optimizations.",
+                "Hackathon, Java, AI",
+                "https://github.com/ElangovanP-dev/ResuMind", "https://resumind-six-vert.vercel.app/", 1);
 
-        seedProject(user, "Personal Expense Tracker",
+        seedProject(user, "BudgetFlow",
                 "A robust Java-based application to track and manage personal daily finances.",
                 "Java, SQL",
-                "https://github.com/ElangoHackIOT5", null, 2);
+                "https://github.com/ElangovanP-dev/BudgetFlow", "https://budget-flow-tawny-tau.vercel.app/", 2);
 
         seedProject(user, "Online Quiz Application",
                 "A complete full-stack web application for hosting and taking dynamic quizzes.",
