@@ -10,14 +10,14 @@ window.addEventListener('load', () => {
     } else {
         console.warn("GSAP is not loaded. Falling back to non-animated layout.");
         // Instantly reveal all GSAP-hidden elements
-        document.querySelectorAll('.gs-reveal, .gs-skill, .gs-project, .gs-gallery').forEach(el => {
+        document.querySelectorAll('.gs-reveal, .gs-skill-card, .gs-project, .metrics-block, .cert-card').forEach(el => {
             el.style.opacity = '1';
             el.style.visibility = 'visible';
         });
-        // Instantly set skill bar progress
-        document.querySelectorAll('.gs-skill .progress').forEach(progress => {
-            const targetWidth = progress.getAttribute('data-width');
-            progress.style.width = targetWidth || '0%';
+        // Instantly set metric number text to target
+        document.querySelectorAll('.metric-number').forEach(metric => {
+            const target = metric.getAttribute('data-target');
+            metric.textContent = target || '0';
         });
     }
 
@@ -70,14 +70,34 @@ window.addEventListener('load', () => {
             setTimeout(() => {
                 if(loader) loader.style.display = 'none';
                 
-                // Start Hero Animations one by one AFTER fully loaded
-                tl.from(".hero-content .tagline", { y: 20, duration: 0.8, ease: "power3.out" })
-                  .from(".hero-content .hero-title", { y: 30, duration: 0.8, ease: "power3.out" }, "-=0.6")
-                  .from(".hero-content .hero-subtitle", { y: 20, duration: 0.8, ease: "power3.out" }, "-=0.6")
-                  .from(".hero-content .hero-desc", { y: 20, duration: 0.8, ease: "power3.out" }, "-=0.6")
-                  .from(".hero-content .hero-buttons", { y: 20, duration: 0.8, ease: "power3.out" }, "-=0.6")
-                  .from(".social-links .social-icon", { scale: 0, duration: 0.5, stagger: 0.1, ease: "back.out(1.7)" }, "-=0.4")
-                  .from(".scroll-indicator", { opacity: 0, duration: 1 }, "-=0.2");
+                // Set visible initial states to avoid FOUC
+                gsap.set([".hero-title", ".tagline", ".hero-subtitle", ".hero-desc", ".hero-buttons", ".social-icon", ".scroll-indicator"], { visibility: "visible" });
+                
+                // Start Hero Animations
+                tl.fromTo(".hero-content .hero-title", 
+                    { opacity: 0, scale: 0.96 }, 
+                    { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" }
+                )
+                .fromTo([
+                    ".hero-content .tagline", 
+                    ".hero-content .hero-subtitle", 
+                    ".hero-content .hero-desc", 
+                    ".hero-content .hero-buttons"
+                ], 
+                    { opacity: 0, y: 15 }, 
+                    { opacity: 1, y: 0, duration: 0.6, stagger: 0.25, ease: "power2.out" }, 
+                    "-=0.35" // Stagger starts 250ms after hero-title starts (600ms - 250ms = 350ms timeline offset)
+                )
+                .fromTo(".social-links .social-icon", 
+                    { opacity: 0, x: -10 }, 
+                    { opacity: 1, x: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" }, 
+                    "-=0.15" // Aligns to start 450ms after hero-title starts (600ms - 450ms = 150ms timeline offset)
+                )
+                .fromTo(".scroll-indicator", 
+                    { opacity: 0 }, 
+                    { opacity: 0.5, duration: 0.6 }, 
+                    "-=0.2"
+                );
             }, 800);
         }, 2000); // 2 seconds loader
     } else {
@@ -175,38 +195,123 @@ window.addEventListener('load', () => {
             );
         });
 
-        // Animate Skills Bar Widths
-        document.querySelectorAll('.gs-skill').forEach((elem) => {
-            gsap.fromTo(elem, 
-                { autoAlpha: 0, y: 40 }, 
-                {
-                    autoAlpha: 1, y: 0, duration: 0.8, ease: "power2.out",
-                    scrollTrigger: { trigger: elem, start: "top 90%" }
-                }
-            );
+        // 2. Technical Skills Matrix
+        // Section Entry: Container fades in smoothly
+        gsap.fromTo(".skills-categories-grid", 
+            { opacity: 0 },
+            { 
+                opacity: 1, duration: 0.8, ease: "power2.out",
+                scrollTrigger: { trigger: ".skills-categories-grid", start: "top 85%" }
+            }
+        );
 
-            let progress = elem.querySelector('.progress');
-            let targetWidth = progress.getAttribute('data-width');
-            
-            gsap.to(progress, {
-                width: targetWidth,
-                duration: 1.5,
-                ease: "power4.out",
+        // Staggered cascade of cards and their pills inside a single scroll timeline per card
+        document.querySelectorAll(".skills-category-card").forEach((card) => {
+            const tl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: elem,
-                    start: "top 85%"
+                    trigger: card,
+                    start: "top 85%",
+                    toggleActions: "play none none none"
                 }
             });
+            
+            tl.fromTo(card,
+                { autoAlpha: 0, y: 20 },
+                { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out" }
+            )
+            .fromTo(card.querySelectorAll(".skill-badge"), 
+                { opacity: 0, scale: 0.8 },
+                { opacity: 1, scale: 1, duration: 0.2, stagger: 0.04, ease: "back.out(1.2)" },
+                "-=0.4"
+            );
         });
 
-        // Stagger Projects
+        // 3. Experience Timeline
+        // Scroll-Linked spine drawing effect
+        gsap.fromTo(".timeline-spine", 
+            { scaleY: 0 },
+            {
+                scaleY: 1,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".timeline",
+                    start: "top 70%",
+                    end: "bottom 80%",
+                    scrub: true
+                }
+            }
+        );
+
+        // Cards and bullet points slide-in & stagger within a single timeline per card
+        document.querySelectorAll(".timeline-item").forEach((item) => {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                }
+            });
+            
+            tl.fromTo(item, 
+                { autoAlpha: 0, x: -15, y: 15 },
+                { autoAlpha: 1, x: 0, y: 0, duration: 0.5, ease: "power2.out" }
+            )
+            .fromTo(item.querySelectorAll(".exp-highlights li"),
+                { autoAlpha: 0 },
+                { autoAlpha: 1, duration: 0.4, stagger: 0.1, ease: "power2.out" },
+                "-=0.2"
+            );
+        });
+
+        // 4. Featured Projects
+        // Cards fade in and slide up
         gsap.fromTo(".gs-project", 
-            { autoAlpha: 0, y: 50 },
+            { autoAlpha: 0, y: 25 },
             { 
-                autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.2, ease: "power3.out",
+                autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.2, ease: "power3.out",
                 scrollTrigger: { trigger: ".projects-grid", start: "top 80%" }
             }
         );
+
+        // 5. Certifications & Achievements
+        // Combine metrics panel slide-in and certification cascade
+        const credsTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".credentials-grid",
+                start: "top 85%",
+                toggleActions: "play none none none"
+            }
+        });
+        
+        credsTl.fromTo(".metrics-block", 
+            { autoAlpha: 0, x: -40 },
+            { autoAlpha: 1, x: 0, duration: 0.8, ease: "power2.out" }
+        )
+        .fromTo(".cert-card", 
+            { autoAlpha: 0, y: 15 },
+            { autoAlpha: 1, y: 0, duration: 0.3, stagger: 0.06, ease: "power2.out" },
+            "-=0.6"
+        );
+
+        // Numerical count-up for LeetCode problems (100) and Certifications (7)
+        document.querySelectorAll('.metric-number').forEach((metricNumber) => {
+            const target = parseInt(metricNumber.getAttribute('data-target'), 10);
+            const obj = { value: 0 };
+            
+            gsap.to(obj, {
+                value: target,
+                duration: 1.2,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".credentials-grid",
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                },
+                onUpdate: () => {
+                    metricNumber.textContent = Math.floor(obj.value);
+                }
+            });
+        });
 
 
     }
