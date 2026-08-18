@@ -283,7 +283,7 @@ h6 {
     font-size: 1rem;
     transition: var(--transition);
     border: 1px solid transparent;
-    cursor: pointer;
+    cursor: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 1.5 L15.5 12 L8.5 13.5 L12.5 21 L9.5 22.5 L5.5 14.5 L0.5 18 Z" fill="%23ffd043" stroke="%23ffffff" stroke-width="1.5" stroke-linejoin="round"/></svg>') 2 1, pointer;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
