@@ -669,30 +669,46 @@ h6 {
 }
 
 .hero-title {
-    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-size: clamp(2.8rem, 6vw, 4.8rem);
+    font-weight: 800;
     margin-bottom: 0.5rem;
-    color: var(--text-primary);
-    letter-spacing: -2px;
     position: relative;
     display: inline-block;
-    animation: heroGlow 3s ease-in-out infinite;
-    text-shadow: 0 0 10px rgba(229, 179, 36, 0.3);
+    perspective: 1000px;
 }
 
-@keyframes heroGlow {
-    0%, 100% {
-        text-shadow:
-            0 0 10px rgba(229, 179, 36, 0.3),
-            0 0 20px rgba(229, 179, 36, 0.1);
-        filter: brightness(1);
+.hero-name-wrap {
+    display: inline-flex;
+    flex-wrap: wrap;
+    background: linear-gradient(120deg, #e5b324 0%, #ffd043 25%, #ffffff 50%, #ffd043 75%, #e5b324 100%);
+    background-size: 250% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: goldLiquidShimmer 4s linear infinite;
+    filter: drop-shadow(0 0 20px rgba(229, 179, 36, 0.45));
+}
+
+@keyframes goldLiquidShimmer {
+    0% {
+        background-position: 0% center;
     }
-    50% {
-        text-shadow:
-            0 0 20px rgba(229, 179, 36, 0.6),
-            0 0 40px rgba(229, 179, 36, 0.3),
-            0 0 60px rgba(229, 179, 36, 0.15);
-        filter: brightness(1.15);
+    100% {
+        background-position: 250% center;
     }
+}
+
+.hero-title .char {
+    display: inline-block;
+    transform-origin: 50% 100%;
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.35s ease;
+    will-change: transform, opacity;
+    cursor: default;
+}
+
+.hero-title .char:hover {
+    transform: translateY(-10px) scale(1.22) rotate(-3deg);
+    filter: drop-shadow(0 0 25px #ffd043) brightness(1.35);
 }
 
 .hero-subtitle {

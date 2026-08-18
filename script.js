@@ -80,10 +80,10 @@ window.addEventListener('load', () => {
             // Set visible initial states to avoid FOUC
             gsap.set([".hero-title", ".tagline", ".hero-subtitle", ".hero-desc", ".hero-buttons", ".social-icon", ".scroll-indicator"], { visibility: "visible" });
             
-            // Start Hero Animations
-            tl.fromTo(".hero-content .hero-title", 
-                { opacity: 0, scale: 0.96 }, 
-                { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" }
+            // Start Hero Animations - 3D Staggered Letter Entrance for ELANGOVAN P
+            tl.fromTo(".hero-title .char", 
+                { opacity: 0, y: 35, rotateX: -90, scale: 0.8 }, 
+                { opacity: 1, y: 0, rotateX: 0, scale: 1, duration: 0.7, stagger: 0.045, ease: "back.out(1.7)" }
             )
             .fromTo([
                 ".hero-content .tagline", 
@@ -93,7 +93,7 @@ window.addEventListener('load', () => {
             ], 
                 { opacity: 0, y: 15 }, 
                 { opacity: 1, y: 0, duration: 0.6, stagger: 0.2, ease: "power2.out" }, 
-                "-=0.35"
+                "-=0.4"
             )
             .fromTo(".social-links .social-icon", 
                 { opacity: 0, x: -10 }, 
@@ -108,6 +108,41 @@ window.addEventListener('load', () => {
         }, 500); // 500ms loader for instant smooth reveal
     } else {
         setTimeout(hideLoader, 300);
+    }
+
+    // Interactive Cipher Decrypt Animation for Hero Name "ELANGOVAN P"
+    const heroTitle = document.getElementById('heroTitle');
+    if (heroTitle) {
+        const cipherChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#$&*@%";
+        const charElements = heroTitle.querySelectorAll('.char');
+        const originalText = Array.from(charElements).map(c => c.textContent);
+
+        let isDecrypting = false;
+        const runCipher = () => {
+            if (isDecrypting) return;
+            isDecrypting = true;
+            let iteration = 0;
+
+            const interval = setInterval(() => {
+                charElements.forEach((charEl, idx) => {
+                    if (originalText[idx] === '\u00A0' || originalText[idx] === ' ') return;
+                    if (idx < iteration) {
+                        charEl.textContent = originalText[idx];
+                    } else {
+                        charEl.textContent = cipherChars[Math.floor(Math.random() * cipherChars.length)];
+                    }
+                });
+
+                if (iteration >= originalText.length) {
+                    clearInterval(interval);
+                    charElements.forEach((charEl, idx) => { charEl.textContent = originalText[idx]; });
+                    isDecrypting = false;
+                }
+                iteration += 1 / 3;
+            }, 30);
+        };
+
+        heroTitle.addEventListener('click', runCipher);
     }
 
     // Failsafe: hide loader after 1 second under all circumstances
