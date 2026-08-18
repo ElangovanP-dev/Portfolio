@@ -64,54 +64,54 @@ window.addEventListener('load', () => {
     }
 
     // 3. Loader & Intro Animation Timeline
+    const hideLoader = () => {
+        if (loader && loader.style.display !== 'none') {
+            loader.style.opacity = '0';
+            setTimeout(() => {
+                loader.style.display = 'none';
+            }, 600);
+        }
+    };
+
     if (hasGsap) {
         const tl = gsap.timeline();
         setTimeout(() => {
-            if(loader) loader.style.opacity = '0';
-            setTimeout(() => {
-                if(loader) loader.style.display = 'none';
-                
-                // Set visible initial states to avoid FOUC
-                gsap.set([".hero-title", ".tagline", ".hero-subtitle", ".hero-desc", ".hero-buttons", ".social-icon", ".scroll-indicator"], { visibility: "visible" });
-                
-                // Start Hero Animations
-                tl.fromTo(".hero-content .hero-title", 
-                    { opacity: 0, scale: 0.96 }, 
-                    { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" }
-                )
-                .fromTo([
-                    ".hero-content .tagline", 
-                    ".hero-content .hero-subtitle", 
-                    ".hero-content .hero-desc", 
-                    ".hero-content .hero-buttons"
-                ], 
-                    { opacity: 0, y: 15 }, 
-                    { opacity: 1, y: 0, duration: 0.6, stagger: 0.25, ease: "power2.out" }, 
-                    "-=0.35" // Stagger starts 250ms after hero-title starts (600ms - 250ms = 350ms timeline offset)
-                )
-                .fromTo(".social-links .social-icon", 
-                    { opacity: 0, x: -10 }, 
-                    { opacity: 1, x: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" }, 
-                    "-=0.15" // Aligns to start 450ms after hero-title starts (600ms - 450ms = 150ms timeline offset)
-                )
-                .fromTo(".scroll-indicator", 
-                    { opacity: 0 }, 
-                    { opacity: 0.5, duration: 0.6 }, 
-                    "-=0.2"
-                );
-            }, 800);
-        }, 2000); // 2 seconds loader
+            hideLoader();
+            // Set visible initial states to avoid FOUC
+            gsap.set([".hero-title", ".tagline", ".hero-subtitle", ".hero-desc", ".hero-buttons", ".social-icon", ".scroll-indicator"], { visibility: "visible" });
+            
+            // Start Hero Animations
+            tl.fromTo(".hero-content .hero-title", 
+                { opacity: 0, scale: 0.96 }, 
+                { opacity: 1, scale: 1, duration: 0.6, ease: "power2.out" }
+            )
+            .fromTo([
+                ".hero-content .tagline", 
+                ".hero-content .hero-subtitle", 
+                ".hero-content .hero-desc", 
+                ".hero-content .hero-buttons"
+            ], 
+                { opacity: 0, y: 15 }, 
+                { opacity: 1, y: 0, duration: 0.6, stagger: 0.2, ease: "power2.out" }, 
+                "-=0.35"
+            )
+            .fromTo(".social-links .social-icon", 
+                { opacity: 0, x: -10 }, 
+                { opacity: 1, x: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" }, 
+                "-=0.15"
+            )
+            .fromTo(".scroll-indicator", 
+                { opacity: 0 }, 
+                { opacity: 0.5, duration: 0.6 }, 
+                "-=0.2"
+            );
+        }, 500); // 500ms loader for instant smooth reveal
     } else {
-        // Fallback: Fade out loader after 1 second if offline
-        setTimeout(() => {
-            if(loader) {
-                loader.style.opacity = '0';
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 800);
-            }
-        }, 1000);
+        setTimeout(hideLoader, 300);
     }
+
+    // Failsafe: hide loader after 1 second under all circumstances
+    setTimeout(hideLoader, 1000);
 
     // 4. Sparkle Trail Cursor / Touch Logic (only if GSAP is loaded)
     if (hasGsap) {
@@ -615,6 +615,7 @@ window.addEventListener('load', () => {
                     toast.style.opacity = '0';
                     setTimeout(() => toast.remove(), 500);
                 }, 4000);
+            }, 100);
         }
     }
 
