@@ -615,37 +615,6 @@ window.addEventListener('load', () => {
                     toast.style.opacity = '0';
                     setTimeout(() => toast.remove(), 500);
                 }, 4000);
-            }, 100);
         }
-    }
-
-    // Dynamic Trending Cursor Follower Effect
-    if (window.innerWidth > 768) {
-        const follower = document.createElement('div');
-        follower.className = 'cursor-follower';
-        document.body.appendChild(follower);
-
-        let posX = -100, posY = -100;
-        let mouseX = -100, mouseY = -100;
-
-        window.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        function animateCursor() {
-            posX += (mouseX - posX) * 0.2;
-            posY += (mouseY - posY) * 0.2;
-            follower.style.transform = `translate3d(${posX - 18}px, ${posY - 18}px, 0)`;
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        // Target buttons & interactive elements for trending cursor hover state
-        const targetElements = document.querySelectorAll('.btn, .btn-primary, .btn-secondary, .submit-btn, .nav-item, .social-icon');
-        targetElements.forEach(el => {
-            el.addEventListener('mouseenter', () => follower.classList.add('is-hovering-btn'));
-            el.addEventListener('mouseleave', () => follower.classList.remove('is-hovering-btn'));
-        });
     }
 });
