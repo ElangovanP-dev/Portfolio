@@ -64,6 +64,41 @@ button,
     cursor: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 1.5 L15.5 12 L8.5 13.5 L12.5 21 L9.5 22.5 L5.5 14.5 L0.5 18 Z" fill="%23ffd043" stroke="%23ffffff" stroke-width="1.5" stroke-linejoin="round"/></svg>') 2 1, pointer;
 }
 
+/* Trending Custom Cursor specifically for Buttons */
+.btn,
+.btn-primary,
+.btn-secondary,
+.submit-btn,
+button.submit-btn {
+    cursor: url('data:image/svg+xml;utf8,<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="18" cy="18" r="15" fill="%23041f13" stroke="%23ffd043" stroke-width="2.5"/><circle cx="18" cy="18" r="17" stroke="%23e5b324" stroke-opacity="0.6" stroke-width="1"/><path d="M11 25L25 11M25 11H15M25 11V21" stroke="%23ffd043" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>') 18 18, pointer !important;
+}
+
+/* Dynamic Follower Ring Cursor */
+.cursor-follower {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 36px;
+    height: 36px;
+    border: 2px solid rgba(229, 179, 36, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transition: width 0.3s ease, height 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 15px rgba(229, 179, 36, 0.2);
+    will-change: transform;
+}
+
+.cursor-follower.is-hovering-btn {
+    width: 64px;
+    height: 64px;
+    border-color: #ffd043;
+    background: rgba(229, 179, 36, 0.18);
+    box-shadow: 0 0 30px rgba(255, 208, 67, 0.65), inset 0 0 15px rgba(255, 208, 67, 0.3);
+    backdrop-filter: blur(2px);
+}
+
+
 ul {
     list-style: none;
 }
@@ -283,7 +318,7 @@ h6 {
     font-size: 1rem;
     transition: var(--transition);
     border: 1px solid transparent;
-    cursor: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 1.5 L15.5 12 L8.5 13.5 L12.5 21 L9.5 22.5 L5.5 14.5 L0.5 18 Z" fill="%23ffd043" stroke="%23ffffff" stroke-width="1.5" stroke-linejoin="round"/></svg>') 2 1, pointer;
+    cursor: url('data:image/svg+xml;utf8,<svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="18" cy="18" r="15" fill="%23041f13" stroke="%23ffd043" stroke-width="2.5"/><circle cx="18" cy="18" r="17" stroke="%23e5b324" stroke-opacity="0.6" stroke-width="1"/><path d="M11 25L25 11M25 11H15M25 11V21" stroke="%23ffd043" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>') 18 18, pointer !important;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
