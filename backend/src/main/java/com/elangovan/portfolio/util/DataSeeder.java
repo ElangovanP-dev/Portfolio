@@ -85,10 +85,10 @@ public class DataSeeder implements CommandLineRunner {
                 "Hackathon, Java, AI",
                 "https://github.com/ElangovanP-dev/ResuMind", "https://resumind-six-vert.vercel.app/", 1);
 
-        seedProject(user, "BudgetFlow",
-                "A robust Java-based application to track and manage personal daily finances.",
-                "Java, SQL",
-                "https://github.com/ElangovanP-dev/BudgetFlow", "https://budget-flow-tawny-tau.vercel.app/", 2);
+        seedProject(user, "Vesper Luxe",
+                "A full-stack multi-themed luxury e-commerce platform featuring dynamic product variants, interactive slide-out cart, Stripe payment simulator, and an executive analytics dashboard.",
+                "Next.js, TypeScript, Prisma, Stripe",
+                "https://github.com/ElangovanP-dev/E-Commerce-Website", "https://e-commerce-website-n1sm.onrender.com", 2);
 
         seedProject(user, "Online Quiz Application",
                 "A complete full-stack web application for hosting and taking dynamic quizzes.",
